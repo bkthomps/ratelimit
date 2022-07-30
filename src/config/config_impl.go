@@ -288,7 +288,7 @@ func (this *rateLimitConfigImpl) GetLimit(
 	}
 
 	if descriptor.GetLimit() != nil {
-		rateLimitKey := descriptorKey(domain, descriptor)
+		rateLimitKey := DescriptorKey(domain, descriptor)
 		rateLimitOverrideUnit := pb.RateLimitResponse_RateLimit_Unit(descriptor.GetLimit().GetUnit())
 		// When limit override is provided by envoy config, we don't want to enable shadow_mode
 		rateLimit = NewRateLimit(
@@ -336,7 +336,7 @@ func (this *rateLimitConfigImpl) GetLimit(
 	return rateLimit
 }
 
-func descriptorKey(domain string, descriptor *pb_struct.RateLimitDescriptor) string {
+func DescriptorKey(domain string, descriptor *pb_struct.RateLimitDescriptor) string {
 	rateLimitKey := ""
 	for _, entry := range descriptor.Entries {
 		if rateLimitKey != "" {

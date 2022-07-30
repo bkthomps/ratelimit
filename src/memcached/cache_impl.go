@@ -135,7 +135,7 @@ func (this *rateLimitMemcacheImpl) DoLimit(
 		limitInfo := limiter.NewRateLimitInfo(limits[i], limitBeforeIncrease, limitAfterIncrease, 0, 0)
 
 		responseDescriptorStatuses[i] = this.baseRateLimiter.GetResponseDescriptorStatus(cacheKey.Key,
-			limitInfo, isOverLimitWithLocalCache[i], hitsAddend)
+			limitInfo, isOverLimitWithLocalCache[i], hitsAddend, config.DescriptorKey(request.Domain, request.Descriptors[i]))
 	}
 
 	this.waitGroup.Add(1)
